@@ -1,0 +1,79 @@
+<template>
+    <style>
+
+        ul.topic {
+            display: flex;
+            flex-flow: column wrap;
+            position:absolute;
+            padding:0;
+            margin:0;
+            width:80%;
+            height:80%;
+            top:10%;
+            left:10%;
+            overflow:hidden;
+        }
+        
+        .topic li {
+            list-style:none;
+            width:50%;
+            background-color:cyan;
+        }
+        
+        .topic .poster {
+            height:35%;
+            background-color:red;
+        }
+        
+        .topic .image {
+             height:45%;
+             flex-grow:1;
+        }
+        
+        .topic .banner {
+            height:20%;
+            background-color:green;
+        }
+    </style>
+    <ul class="topic">           
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</template>
+
+<script>
+    'use strict';
+
+    var importDoc2 = document.currentScript.ownerDocument;
+    var proto2 = Object.create(HTMLElement.prototype);
+
+    proto2.createdCallback = function() {
+        // create shadow dom
+        this.appendChild(
+            document.importNode(importDoc2.querySelector('template').content, true)
+        );
+        
+         // private variables
+        let node = this.querySelector("ul");
+        let childrenLength = node.children.length-1;
+        let data = []
+        
+        // bind data 
+        this.bindData = function(bindData) {
+            data = bindData;
+            for ( var i=0; i<=childrenLength; i++ ) {
+                if (i < data.length)
+                  this.updateElement(node.children.item(i), data[i]);
+            }
+        };
+
+        // default update function
+        this.updateElement = function update(element, value){ console.log(value); }
+    };
+    
+    window.Topic = document.registerElement('x-topic', {prototype: proto2});
+</script>
