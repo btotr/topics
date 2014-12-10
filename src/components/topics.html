@@ -73,7 +73,17 @@
     </style>
     <ul id="topics">           
         <li class="topic">
-            <h1>3</h1>
+            <h1>1</h1>
+            <ul class="contents">
+                <li class="poster"></li>
+                <li class="image"></li>
+                <li class="banner"></li>
+                <li class="image"></li>
+                <li class="poster"></li>
+            </ul>
+        </li>
+        <li class="topic">
+            <h1>2</h1>
             <ul class="contents">
                 <li class="poster"></li>
                 <li class="image"></li>
@@ -93,7 +103,7 @@
             </ul>
         </li>
         <li class="topic">
-            <h1>3</h1>
+            <h1>4</h1>
             <ul class="contents">
                 <li class="poster"></li>
                 <li class="image"></li>
@@ -103,17 +113,7 @@
             </ul>
         </li>
         <li class="topic">
-            <h1>3</h1>
-            <ul class="contents">
-                <li class="poster"></li>
-                <li class="image"></li>
-                <li class="banner"></li>
-                <li class="image"></li>
-                <li class="poster"></li>
-            </ul>
-        </li>
-        <li class="topic">
-            <h1>3</h1>
+            <h1>5</h1>
             <ul class="contents">
                 <li class="poster"></li>
                 <li class="image"></li>
@@ -150,6 +150,7 @@
               this.updateElement(node.children.item(i), data[i]);
         };
 
+        // move topics
         this.move = function(direction) {
             // set the new data offset
             offset += direction;
@@ -167,16 +168,8 @@
             }
         };
         
-        this.updateElement = function update(element, value){
-            element.firstElementChild.textContent = value;
-        }
-
-        this.bindData(["x","y", "z", "a", "b", "c"])
-        
-        setInterval(function(){
-            this.move(1)
-        }.bind(this),2000)
-        
+        // default update function
+        this.updateElement = function update(element, value){ console.log(value); }
     };
     
     window.Topics = document.registerElement('x-topics', {prototype: proto});

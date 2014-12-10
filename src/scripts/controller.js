@@ -1,6 +1,3 @@
-
-
-/*
 var Model = function() {};
 Model.prototype.getData = function(callback){
     callback([
@@ -17,32 +14,29 @@ Model.prototype.getData = function(callback){
 };
 
 function View() {
-  var listUpdate = function(node, value) {
-       node.style.backgroundColor = value.color;
-       // node.textContent = value.number;
-  };
-  
-  this.lists = [];
-  var listElements = document.getElementsByTagName("ul");
-  for (var i=0,l=listElements.length;i<l;i++) 
-    this.lists.push(new List(listElements[i], listUpdate));
+    this.topics = new Topics();
+    this.topics.updateElement = function(node, value) {
+        node.firstElementChild.textContent = value.color;
+    };
+    document.body.appendChild(this.topics);
 }
 
 function Controller() {
-  this.model = new Model();
-  this.view = new View();
-  // bind the data
-  this.model.getData(function(data){
-      this.view.lists.forEach(function(list){ list.bindData(data); });
-  }.bind(this));
-// listener
-document.body.addEventListener("keydown", function(e){
-    if (e.keyCode == 37) this.view.lists.forEach(function(list){ list.move(1); });
-    if (e.keyCode == 39) this.view.lists.forEach(function(list){ list.move(-1); });
-}.bind(this), true);
+    this.model = new Model();
+    this.view = new View();
+  
+    // bind the data
+    this.model.getData(function(data){
+        this.view.topics.bindData(data)
+    }.bind(this));
+
+    // listener
+    document.addEventListener("keydown", function(e){
+        if (e.keyCode == 37) this.view.topics.move(1);
+        if (e.keyCode == 39) this.view.topics.move(-1);
+    }.bind(this), true);
 }
 
-*/
-
-
-//new Controller()
+window.addEventListener("load", function(){
+    new Controller()    
+})
