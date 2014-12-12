@@ -13,43 +13,80 @@
             left:10%;
             overflow:hidden;
         }
+
+        .topic button {
+            background-color:transparent;
+            border:none;
+            width:100%;
+            height:100%;
+            color:white;
+        }        
+        
+        .topic button.focus {
+            background-color:green;
+        }
         
         .topic li {
+            font-family:helvetica, sans-serif;
             list-style:none;
             width:50%;
-            background-color:cyan;
+            background-color: rgba(0, 0, 0, 0.2);
+            font-size:2.8vh;
+            overflow:hidden;
         }
         
         .topic .poster {
             height:35%;
-            background-color:red;
+            background-color: rgba(255, 255, 255, 0.2);
         }
         
+        .topic .poster span {
+            position:relative;
+            display:block;
+            left:40%;
+            padding:2%;
+        }
+
         .topic .image {
              height:45%;
              flex-grow:1;
+             bottom:5px;
+        }
+        
+        .topic .image span {
+            position:relative;
+            top:80%;
+            left:2%;
+            font-size:4vh;
+            text-transform: uppercase;
         }
         
         .topic .banner {
             height:20%;
-            background-color:green;
+            background-color: rgba(0, 0, 0, 0.5);
         }
+        
+        .topic .banner span {
+            display:block;
+            padding:2%;
+        }
+
     </style>
     <ul class="topic">           
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li><button><span></span></button></li>
+        <li><button><span></span></button></li>
+        <li><button><span></span></button></li>
+        <li><button><span></span></button></li>
+        <li><button><span></span></button></li>
+        <li><button><span></span></button></li>
     </ul>
 </template>
 
 <script>
     'use strict';
 
-    var importDoc2 = document.currentScript.ownerDocument;
-    var proto2 = Object.create(HTMLElement.prototype);
+    let importDoc2 = document.currentScript.ownerDocument;
+    let proto2 = Object.create(HTMLElement.prototype);
 
     proto2.createdCallback = function() {
         // create shadow dom

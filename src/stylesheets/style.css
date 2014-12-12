@@ -4,3 +4,13 @@ body {
     margin:0;
     height:100%;
 }
+
+x-slideshow::shadow h1 {
+    font-family:helvetica, sans-serif;
+    opacity:0.5;
+    position:absolute;
+    left:10%;
+    margin:0;
+    top:5%;
+    font-size:3.5vh;
+}
