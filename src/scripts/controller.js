@@ -1,7 +1,6 @@
 function Controller() {
     this.model = new Model();
     this.view = new View();
-    this.navigationMode = "topics";
     this.timer = setTimeout(function(){},9999);
     this.focusManager = new FocusManager();
   
@@ -16,19 +15,10 @@ function Controller() {
     // listener
     document.addEventListener("keydown", this.keydown.bind(this));
     this.view.slideshow.addEventListener("slideshowEnd", this.slideshowEnd.bind(this));
-    window.addEventListener("nofocus", this.nofocus.bind(this))
 }
 
-Controller.prototype.nofocus = function(e){
-    this.navigationMode = "slideshow";
-    //var direction = e.detail.direction;
-    //if (direction == "left") direction = "right"
-    //if (direction == "right") direction = "left"
-    //this.moveSlideshow(direction);
-}
 
 Controller.prototype.keydown = function(e){
-    if (this.navigationMode == "topics") return
     if (e.keyCode == 37) this.moveSlideshow("right");
     if (e.keyCode == 39) this.moveSlideshow("left");
     e.preventDefault()
@@ -37,14 +27,13 @@ Controller.prototype.keydown = function(e){
 Controller.prototype.slideshowEnd = function(e){
     var self  = this;
     self.timer = setTimeout(function(){ 
-        self.navigationMode = "topics"; 
         self.focusManager.setFocus(self.view.getFirstItemInTopic());
-    },500)
+        self.focusManager.setActive(true);
+    },  2000)
 }
 
 Controller.prototype.moveSlideshow = function(direction){
-    console.log("move", direction, this.navigationMode);
-    
+    this.focusManager.setActive(false);
     window.clearTimeout(this.timer);
     // slideshow mode
     if (direction == "left")this.view.slideshow.move(1);

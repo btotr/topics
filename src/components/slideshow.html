@@ -64,9 +64,7 @@
 
         // move topics
         this.move = function(direction) {
-            console.log("move")
             node.children[2].classList.remove("active");
-            node.children[4].classList.remove("active");
             
             // set the new data offset
             offset += direction;
@@ -88,9 +86,9 @@
         // default update function
         this.updateElement = function update(element, value){ console.log(value); }
         
-        
-        var slideshowEndEvent = new CustomEvent("slideshowEnd", {"detail":{"offset":this.offset}})
-        node.firstElementChild.addEventListener("webkitTransitionEnd", function(){
+        var slideshowEndEvent = new CustomEvent("slideshowEnd")
+        node.children[3].addEventListener("webkitTransitionEnd", function(){
+
             this.dispatchEvent(slideshowEndEvent)
         }.bind(this))
         

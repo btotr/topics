@@ -3,7 +3,7 @@ function View() {
         node.className = value.type;
         node.querySelector("span").textContent = value.description;
         if (value.src !== "") {
-            node.style.backgroundImage = "src("+value.src+")"
+            node.style.backgroundImage = "url("+value.src+")"
         }
     }
     

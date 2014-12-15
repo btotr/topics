@@ -2,10 +2,13 @@
 function FocusManager() {
     this.debugMode = false;
     this.focusedElement = null
+    this.active = true;
 
     var self = this;
 
     document.addEventListener("keydown", function moveFocus(e) {
+        if(self.active === false) return
+        console.log("search" )
         // remove debug lines on backspace
         if (e.keyCode === 8){
             self.clearDebug();
@@ -14,21 +17,22 @@ function FocusManager() {
         // NOTE use the html5 attribute autofocus to set the first focused element
         if (e.keyCode in self.directions) {
             if(self.focusInDirection(self.getFocusedElement(), e.keyCode)){
+                e.stopImmediatePropagation();
                 e.preventDefault();
-                e.stopPropagation();
                 return
             }
-            
-            console.log(self.directions[parseInt(e.keyCode)], e.keyCode)
-            window.dispatchEvent(new CustomEvent("nofocus", {"detail":{"direction":self.directions[parseInt(e.keyCode)]}}))
         }
     }, false);
 }
 
+FocusManager.prototype.setActive = function(active){
+    this.active = active;
+}
+
 
 FocusManager.prototype.setFocus = function setFocus(focusableNode) {
-    console.log(focusableNode)
     var oldFocusableNode = this.getFocusedElement();
+    if (focusableNode.isSameNode(oldFocusableNode)) return
     if (oldFocusableNode) {
         oldFocusableNode.classList.remove("focus");
     }
